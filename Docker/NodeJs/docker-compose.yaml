@@ -9,11 +9,8 @@ services:
       - node-network
     depends_on:
       - db
-    healthcheck:
-      test: ["CMD", "nc", "-z", "db", "3306"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+    environment:
+      WAIT_HOSTS: db:3306
   db:
     image: mysql:5.7
     command: --innodb-use-native-aio=0

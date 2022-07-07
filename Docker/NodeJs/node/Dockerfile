@@ -6,6 +6,8 @@ COPY . .
 
 EXPOSE 3000
 
-RUN npm install
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /usr/local/bin/wait
 
-CMD ["node","index.js"]
+RUN chmod +x /usr/local/bin/wait && npm install
+
+CMD /usr/local/bin/wait && node index.js
