@@ -1,0 +1,43 @@
+version: '3'
+services:
+  app:
+    build:
+      context: node
+    container_name: app
+    restart: on-failure
+    networks:
+      - node-network
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD", "nc", "-z", "db", "3306"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=usersdb
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - node-network
+  rproxy:
+    image: nginx:stable-alpine
+    container_name: rproxy
+    restart: always
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - node-network
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+networks:
+  node-network:
+    driver: bridge
