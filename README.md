@@ -1,6 +1,6 @@
 # FullCycle Challenges
 
-FullCycle course challenges repository
+FullCycle 3.0 course challenges repository
 
 ## Docker Module
 - [Go App](./Docker/Go/)
