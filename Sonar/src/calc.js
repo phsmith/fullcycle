@@ -13,6 +13,5 @@ const multi = (a, b) => {
 module.exports = {
     sum: sum,
     sub: sub,
-    multi: multi,
-    div: div
+    multi: multi
 };
