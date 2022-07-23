@@ -5,6 +5,10 @@ on:
     branches:
       - develop
 
+defaults:
+  run:
+    working-directory: Sonar
+
 jobs:
   build:
     name: Build
