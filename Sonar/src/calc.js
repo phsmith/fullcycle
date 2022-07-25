@@ -14,4 +14,8 @@ const div = (a, b) => {
     return a / b
 };
 
-module.exports = {sum, sub, multi, div}
+const double = (a) => {
+    return a * a
+};
+
+module.exports = {sum, sub, multi, div, double}
